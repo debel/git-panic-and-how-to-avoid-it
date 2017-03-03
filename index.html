@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Git Panic and how to avoid it</title>
+    <meta charset="utf-8">
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <meta name="description" content="A presentation about advanced git topics and using git the right way" />
+    <link rel="stylesheet" href="build/bundle.css" />
+</head>
+
+<body>
+    <div id="presentation" class="reveal">
+        <div class="slides">
+            <section>
+                <h1>Git Panic</h1>
+                <h2 style="text-align: right;">and how to avoid it</h2>
+            </section>
+            <section>
+                <h3>How well do you feel you know git?</h3>
+            </section>
+            <section>
+                <h3>How well is your team using git?</h3>
+            </section>
+            <section>
+                <h3>Git Panic symptoms</h3>
+                <ul>
+                    <li>We can only use git through GUIs</li>
+                    <li>Our git workflow is a mess</li>
+                    <li>Our git history is a mess</li>
+                    <li>We get a lot of conflicts</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Git Panic symptoms</h3>
+                <ul>
+                    <li>We fix git by cloning to a fresh state</li>
+                    <li>We get blocked by not pushed work</li>
+                    <li>We lose local changes</li>
+                    <li>We lose remote commits</li>
+                </ul>
+            </section>
+            <section>
+              <img src="images/dontpanic.jpg" />
+            </section>
+            <section>
+                <h3>Pure Vegan Homeopathic solutions</h3>
+                <ul>
+                    <li>Use the console</li>
+                    <li>Name remotes and branches meaningfully</li>
+                    <li>Check your status and history often</li>
+                    <li>Fetch remotes often</li>
+                    <li>Push to your branch often</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Pure Vegan Homeopathic solutions</h3>
+                <ul>
+                    <li>Follow a commit message format</li>
+                    <li>Read the manual often</li>
+                    <li>Make git help you:
+                        <ul>
+                            <li>Aliases</li>
+                            <li>Tags</li>
+                            <li>Hooks</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h3>Setting up a repository</h3>
+                <div>Use <span class="inline-code">-o</span> to give a meaningful name to the remote
+                <pre><code class="bash">
+    git init vs git init --bare
+    git clone -o "remote_name"
+                    </code></pre>
+            </section>
+            <section>
+                <h3>Seeing history</h3>
+                <pre><code class="bash">
+    git log --all --graph --format="%h %d %an %cr %s"
+    git log --author="Your Name" --since="3 weeks ago"
+    git log master...my-branch --left-right
+    git log -p
+                  </code></pre>
+            </section>
+            <section>
+              <h3>Setting Aliases</h3>
+              <pre><code class="bash">
+  git config --global alias.co "checkout"
+  git config --global alias.br "branch --verbose"
+  git config --global alias.lg "log --graph --format='%h %d %an %cr %s'"
+              </code></pre>
+            </section>
+            <section>
+                <h3>Adding something specific</h3>
+                <pre><code class="bash">
+    git add -p
+                  </code></pre>
+            </section>
+            <section>
+                <h3>Moving our HEAD around</h3>
+                <pre><code class="bash">
+    git reset --hard &lt;commitish&gt;
+                    </code></pre>
+                <div class="warning">
+                    Warning: deletes changes in the index and working tree.<br/>
+                    Warning: may lead to orphan commits
+                </div>
+            </section>
+            <section>
+                <h3>Where was my HEAD</h3>
+                <pre><code class="bash">
+    git reflog
+                </code></pre>
+            </section>
+            <section>
+                <h3>Clearing the index snippet by snippet</h3>
+                <pre><code class="bash">
+    git reset -p
+                </code></pre>
+            </section>
+            <section>
+                <h3>Unpacking commits</h3>
+                <pre><code class="bash">
+    git reset --soft &lt;commitish&gt;
+                </code></pre>
+            </section>
+            <section>
+                <h3>Checkout the code</h3>
+                <pre><code class="bash">
+    git checkout -p
+    git checkout --orphan "separate history"
+                </code></pre>
+            </section>
+            <section>
+                <h3>Pull and compare</h3>
+                <h5>A pull is just a fetch and a merge</h5>
+                <pre><code class="bash">
+    git fetch &lt;remote&gt; &lt;branch&gt;
+    git lg --left-right HEAD...&lt;remote/branch&gt;
+                </code></pre>
+            </section>
+            <section>
+                <h3>Moving a single commit around</h3>
+                <pre><code class="bash">
+    git cherry-pick &lt;commitish&gt;
+                </code></pre>
+            </section>
+            <section>
+                <h3>Moving many commits around</h3>
+                <pre><code class="bash">
+    git rebase &lt;target-commitish&gt;
+    git rebase -i
+    git pull --rebase
+                </code></pre>
+            </section>
+            <section>
+                <h3>Example commit message template hook</h3>
+                <pre><code class="bash">
+    # .git/hooks/prepare-commit-msg
+    # hook must be executable
+    #!/bin/sh
+
+    # puts the name of the current branch
+    # in the commit message template
+    echo "[`git rev-parse --abbrev-ref HEAD`] message" > "$1"
+              </code></pre>
+            </section>
+            <section>
+              <h3>Example simple deployment hook</h3>
+              <pre><code class="bash">
+  # .git/hooks/post-receive
+  # hook must be executable
+  GIT_WORK_TREE=/app_code git checkout master -f
+  cd /app_code
+  npm install
+  npm run build
+  npm run restart
+  echo "deployed"
+              </code></pre>
+            </section>
+            <section>
+              <img src="images/git.jpg" />
+            </section>
+        </div>
+    </div>
+    <script src="build/bundle.js"></script>
+</body>
+
+</html>

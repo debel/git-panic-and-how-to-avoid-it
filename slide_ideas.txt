@@ -1,0 +1,69 @@
+Git Panic and how to avoid it
+
+How well do you feel you know git?
+
+Git is hard.
+
+Git Panic symptoms
+ We can only use git through GUIs
+ Our git workflow is a mess
+ Our git history is a mess
+ We get a lot of conflicts
+ We get blocked by not pushed work
+ We lose local changes
+ We fix git by cloning to a fresh state
+ We lose remote commits
+
+Pure Vegan Organic Homeopathic solutions
+ Use the console
+ Name remotes and branches meaningfully
+ Check your status and history often
+ Fetch remotes often
+ Push to your branch often
+ Follow a commit message format
+ Read the manual often
+ Make git help you
+  Aliases
+  Tags
+  Hooks
+
+Setting up a repository
+ git init vs git init --bare
+ git clone -o "remote_name"
+
+Seeing history
+ git log --all --graph --format="%h %d %an %cr %s"
+ git log --author="Your Name" --since="3 weeks ago"
+ git log master...my-branch --left-right
+ git log -p
+
+Adding something specific
+  git add -p
+
+Moving our HEAD around
+ git reset --hard <commitish>
+Warning: deletes changes in the index and working tree
+Warning: may lead to orphan commits
+
+Clearing the index
+ git reset -p
+
+Unpacking commits
+ git reset --soft <commitish>
+
+Where was my HEAD
+ git reflog
+
+Checkout the code
+ git checkout branch/commit file/folder
+ git checkout -b new_branch
+ git checkout -p
+ git checkout --orphan
+
+A pull is just a fetch and a merge
+ git fetch remote branch
+
+Moving commits around
+ git cherry-pick <commitish>
+ git rebase <target-commitish>
+ git rebase -i
