@@ -1,0 +1,20 @@
+{
+  "name": "git_panic_and_how_to_avoid_it",
+  "description": "Git panic and how to avoid it",
+  "main": "index.html",
+  "authors": [
+    "Mihail Mikov"
+  ],
+  "license": "ISC",
+  "homepage": "https://debel.github.io/git-panic-and-how-to-avoid-it",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "reveal.js": "^3.4.1"
+  }
+}
