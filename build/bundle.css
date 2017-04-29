@@ -1736,6 +1736,11 @@ based on dark.css by Ivan Sagalaev
   font-weight: bold;
 }
 
+.overflown {
+  padding-bottom: 40px !important;
+  overflow: visible !important;
+}
+
 .inline-code {
   color: salmon;
   background-color: #636363;

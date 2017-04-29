@@ -2,431 +2,452 @@
 <html>
 
 <head>
-    <title>Git Panic and how to avoid it</title>
-    <meta charset="utf-8">
-    <meta name=viewport content="width=device-width, initial-scale=1">
-    <meta name="description" content="A presentation about advanced git topics and using git the right way" />
-    <link rel="stylesheet" href="build/bundle.css" />
+  <title>Git Panic and how to avoid it</title>
+  <meta charset="utf-8">
+  <meta name=viewport content="width=device-width, initial-scale=1">
+  <meta name="description" content="A presentation about advanced git topics and using git the right way" />
+  <link rel="stylesheet" href="build/bundle.css" />
 </head>
 
 <body>
-    <div id="presentation" class="reveal">
-        <div class="slides">
-            <section id="title">
-                <h1>Git Panic</h1>
-                <h2 style="text-align: right;">and how to avoid it</h2>
-                <div style="text-align: left">Mihail Mikov<br/>Skyscanner, 2017</div>
-            </section>
-            <section id="goals">
-                <h3>Presentation Goals:</h3>
-                <ul>
-                  <li class="fragment">Improved personal productivity</li>
-                  <li class="fragment">Improved team workflow</li>
-                  <li class="fragment">Improved confidence</li>
-                </ul>
-                  <div class="fragment">
-                    <hr/>
-                    through better understanding of git concepts and commands
-                  </div>
-                </ul>
-            </section>
-            <section id="symptoms-1">
-                <h3>Git Panic symptoms</h3>
-                <ul>
-                    <li>Using git through GUIs only</li>
-                    <li>Workflow is a mess</li>
-                    <li>History is a mess</li>
-                    <li>A lot of conflicts</li>
-                </ul>
-            </section>
-            <section id="symptoms-2">
-                <h3>Git Panic symptoms</h3>
-                <ul>
-                    <li>Fix git by cloning to a fresh state</li>
-                    <li>Blocked by not pushed work</li>
-                    <li class="warning">Lost local changes</li>
-                    <li class="warning">Lost remote commits</li>
-                </ul>
-            </section>
-            <section id="panic">
-              <img width="100%" src="images/panic-home-alone.jpg">
-            </section>
-            <section id="dont-panic">
-                <img src="images/dontpanic.jpg" />
-            </section>
-            <section id="solutions-1">
-                <h3>Pure Vegan Homeopathic solutions</h3>
-                <ul>
-                    <li>Use the console</li>
-                    <li>Read the manual</li>
-                    <li>Check your status and history often</li>
-                    <li>Fetch remotes often</li>
-                    <li>Push to your branch often</li>
-                </ul>
-            </section>
-            <section id="solutions-2">
-                <h3>Pure Vegan Homeopathic solutions</h3>
-                <ul>
-                    <li>Follow a commit message format</li>
-                    <li>Name remotes and branches meaningfully</li>
-                    <li>Make git help you:
-                        <ul>
-                            <li>Aliases</li>
-                            <li>Tags</li>
-                            <li>Hooks</li>
-                        </ul>
-                    </li>
-                </ul>
-            </section>
-            <section id="setting-up">
-                <h3>Setting up a repository</h3>
-                <div>Use "-o" to give a meaningful name to the remote</div>
-                <pre><code class="bash">
-  # Use -o to give a meaningful name to the remote
-  git clone -o "remote_name"
-
-  # bare repos don't have a working tree
-  # which is useful for a shared remote
-  git init vs git init --bare
-                </code></pre>
-                <img width="80%" src="images/normal-vs-bare.png" />
-            </section>
-            <section id="aliases">
-              <h3>Setting Aliases</h3>
-              <div>Common tasks should be easy to perform</div>
-              <pre><code class="bash">
-  git config --global alias.co "checkout"
-  git config --global alias.br "branch --verbose"
-  git config --global alias.lg "log --graph --format='%h %d %an %cr %s'"
-              </code></pre>
-            </section>
-            <section id="repo-history">
-                <h3>Project history</h3>
-                <div>Use a short, but detailed graph view of your history</div>
-                <pre><code class="bash">
-  git log --all --graph --format="%h %d %an %cr %s"
-  git log --author="Your Name" --since="3 weeks ago"
-  git log master...my-branch --left-right
-  git log -p
-                </code></pre>
-                <img width="80%" src="images/git-log-nice.png" />
-            </section>
-            <section id="commit-ranges">
-              <h3>Commit ranges</h3>
-              <div>double vs triple dot ranges</div>
-              <img width="45%" src="images/double-dot-tree.png" />
-              <img width="45%" src="images/triple-dot-tree.png" />
-            </section>
-            <section id="reflog">
-                <h3>Branch history</h3>
-                <div>Useful for finding things you were working on</div>
-                <pre><code class="bash">
-  # show a history of the commits
-  # the given branch was pointing to
-  git reflog &lt;branch&gt;
-                </code></pre>
-                <img width="80%" src="images/git-reflog.png" />
-            </section>
-            <section id="revs">
-              <h3>Referencing revisions</h3>
-              <div>Many ways to get to a commit</div>
-              <pre><code style="padding-bottom: 40px;overflow: visible" class="bash">
-  # exclude commit and its ancestry
-  ^master
-
-  # the 2nd ancestor of the current commit
-  master~2
-  master^^
-
-  #the 2nd parent of the current commit
-  master^2
-
-  # the 3rd commit in the log of the branch
-  master@{2}
-
-  # the commit the branch pointed to at specific date
-  master@{5.days.ago}
-              </code></pre>
-            </section>
-            <section id="file-history">
-              <h3>File history</h3>
-              <div>Don't blame the player, blame the game</div>
-              <pre><code class="bash">
-  # show who and when last modified each line of a file
-  git blame --date=relative &lt;file-name&gt;
-
-  # show the detailed history of a file
-  git lg -p -- &lt;file-name&gt;
-              </code></pre>
-              <img width="100%" src="images/git-blame.png" />
-            </section>
-            <section id="adding">
-                <h3>Adding something specific</h3>
-                <div>Stage your changes and create your commits with care</div>
-                <pre><code class="bash">
-  git add -p
-                </code></pre>
-                <img width="80%" src="images/add-p.png" />
-            </section>
-            <section id="reset-p">
-                <h3>Clearing the index snippet by snippet</h3>
-                <div>That shouldn't be in your next commit</div>
-                <pre><code class="bash">
-  # unstage changes from the index
-  git reset -p
-                </code></pre>
-                <img width="80%" src="images/git-reset-p.png" />
-            </section>
-            <section id="checkout-p">
-              <h3>Make that snippet great again</h3>
-              <div>Bring back an older version of the snippet</div>
-              <pre><code class="bash">
-  # pick and override snippets in the working tree
-  git checkout -p &lt;commitish&gt; &lt;file-name&gt;
-              </code></pre>
-              <img width="80%" src="images/git-checkout-p.png" />
-            </section>
-            <section id="checkout">
-                <h3>Checkout the code</h3>
-                <div>Checkout does a lot of things</div>
-                <pre><code class="bash">
-  # checkout a branch you previously worked on
-  git checkout @{-1}
-
-  # create a new branch and switch to it
-  git checkout -b "new_branch"
-
-  # like "-b" creates a branch, but the first commit
-  # on this branch will start an independant history
-  git checkout --orphan "separate_history"
-                </code></pre>
-            </section>
-            <section id="detached-head">
-                <h3>Detached head</h3>
-                <div>A scary name for "you are not on any branch"</div>
-                <pre><code>
-  git checkout &lt;branch&gt;
-  # HEAD is pointing to a branch
-  # which is pointing to a commit
-
-  git checkout &lt;commit&gt;
-  # HEAD is pointing directly to a commit
-                </code></pre>
-            </section>
-            <section id="reset-hard">
-                <h3>Moving our HEAD around</h3>
-                <pre><code class="bash">
-  # both HEAD and the current branch
-  # will point to the given commit
-  git reset --hard &lt;commitish&gt;
-                    </code></pre>
-                <div class="warning">
-                    deletes changes in the index and working tree<br/>
-                    may lead to orphan commits
-                </div>
-            </section>
-            <section id="reset-soft">
-                <h3>Unpacking commits</h3>
-                <div>You don't need to rebase to squash your commits</div>
-                <pre><code class="bash">
-  # make HEAD point to a specific commit
-  # without changing the index or the working tree
-  git reset --soft &lt;commitish&gt;
-                </code></pre>
-            </section>
-            <section id="stash">
-              <h3>The stash is like a branch</h3>
-              <div>The dog ate my stash, maaan</div>
-              <pre><code style="padding-bottom: 20px;overflow: visible" class="bash">
-  # save unfinished work as a new commit
-  git stash save -p "unfinished work"
-
-  # stash list and reflog stash are the same
-  git stash list
-  git reflog stash
-
-  # stash show and show stash are the same
-  git stash show -p
-  git show stash@{0}
-
-  # pop vs apply
-  git stash pop stash@{1}
-  git stash apply stash@{1}
-              </code></pre>
-            </section>
-            <section id="revert">
-                <h3>Undo some changes</h3>
-                <pre><code class="bash">
-  # creates a commit that negates the changes
-  # introduced in another commit
-  git revert &lt;commitish&gt;
-                </code></pre>
-            </section>
-            <section id="cherry-pick">
-                <h3>Moving a single commit around</h3>
-                <pre><code class="bash">
-  # creates a new commit at HEAD with the
-  # same changes introduced by another commit
-  git cherry-pick &lt;commitish&gt;
-                </code></pre>
-            </section>
-            <section id="rebase">
-                <h3>Moving many commits around</h3>
-                <pre><code class="bash">
-  # as if you cherry-picked
-  # all the commits on a brach in order
-  git rebase &lt;new-base-commitish&gt; &lt;commitish-to-be-rebased&gt;
-
-  # interactive rebase
-  git rebase -i
-
-  # rebase instead of creating a merge commit
-  git pull --rebase
-                </code></pre>
-            </section>
-            <section id="pull-and-compare">
-                <h3>Pull and compare</h3>
-                <div>A pull is just a fetch and a merge</div>
-                <pre><code class="bash">
-  git fetch &lt;remote&gt; &lt;branch&gt;
-
-  # show a graph of all commits
-  # since the last common point between the branches
-  git lg --left-right HEAD...&lt;remote/branch&gt;
-                </code></pre>
-            </section>
-            <section id="safe-force-push">
-                <h3>Force push, but politely</h3>
-                <pre><code class="bash">
-  # only re-write the remote's history
-  # if you already have a local copy of it
-  git push --force-with-lease
-                </code></pre>
-            </section>
-            <section id="workflows">
-              <h3>Workflows</h3>
-              <ul>
-                <li>All in master</li>
-                <li>Team / Feature branches</li>
-                <li>Merge/Pull requests</li>
-              </ul>
-            </section>
-            <section id="merge-no-ff">
-              <h3>Merge, but no fast-forward</h3>
-              <pre><code class="bash">
-  # Rebase and merge to keep the branch history visible
-  git rebase feature_branch master
-  git merge feature_branch --no-ff
-              </code></pre>
-            </section>
-            <section id="tag-and-squash">
-              <h3>Tag and squash</h3>
-              <pre><code class="bash">
-  # tag the feature branch
-  git tag "feature_branch_done"
-
-  # squash using either reset or rebase
-  git reset --soft HEAD~5
-  git commit -m "squashed_feature"
-              </code></pre>
-            </section>
-            <section>
-              <h3>Git hooks</h3>
-              <img width="100%" src="images/git-hooks.jpg" />
-            </section>
-            <section id="pre-commit-hook">
-                <h3>Example pre-commit hook</h3>
-                <pre><code class="bash">
-  # .git/hooks/pre-commit
-  # hook must be executable
-  #!/bin/sh
-
-  # run linter and tests
-  # if either commands exit status is non zero
-  # the commit process will be canceled
-  npm run lint
-  npm run test
-                </code></pre>
-            </section>
-            <section id="message-hook">
-                <h3>Example commit message template hook</h3>
-                <pre><code class="bash">
-  # .git/hooks/prepare-commit-msg
-  # hook must be executable
-  #!/bin/sh
-
-  # puts the name of the current branch
-  # in the commit message template
-  echo "[`git rev-parse --abbrev-ref HEAD`] MESSAGE HERE" > "$1"
-                </code></pre>
-            </section>
-            <section id="deployment-hook">
-                <h3>Example simple deployment hook</h3>
-                <pre><code class="bash">
-  # .git/hooks/post-receive
-  # hook must be executable
-  GIT_WORK_TREE=/app_code git checkout master -f
-  cd /app_code
-  npm install
-  npm run build
-  npm run restart
-  echo "deployed"
-                </code></pre>
-            </section>
-            <section id="take-aways">
-                <h3>Recap &amp; takeaways</h3>
-                <ul>
-                    <li class="fragment">Use the console</li>
-                    <li class="fragment">Name remotes, branches and commits meaningfully</li>
-                    <li class="fragment">Keep your workflow &amp; history understandable</li>
-                    <li class="fragment">Fetch and push often</li>
-                    <li class="fragment">Read the manual</li>
-                    <li class="fragment">Make git help you</li>
-                </ul>
-            </section>
-            <section id="links">
-                <h3>Links:</h3>
-                <ul>
-                    <li><a target="_blank" href="http://learngitbranching.js.org/">Learn git in the browser</a></li>
-                    <li><a target="_blank" href="https://www.atlassian.com/git/tutorials">
-                      Git tutorials by Atlassian</a></li>
-                    <li><a target="_blank" href="https://marklodato.github.io/visual-git-guide/index-en.html">
-                      A visual guide to git</a></li>
-                    <li><a target="_blank" href="https://codewords.recurse.com/issues/two/git-from-the-inside-out">
-                      Git from the inside out</a></li>
-                    <li><a target="_blank" href="https://www.youtube.com/watch?v=fCtZWGhQBvo">
-                      Git from the inside out (youtube)</a></li>
-                    <li><a target="_blank" href="https://git-scm.com/book/en/v1/Git-Internals">
-                      Git internals</a></li>
-                    <li><a target="_blank" href="https://blog.scottnonnenberg.com/better-git-configuration/">
-                      Git configuration tips &amp; tricks</a></li>
-                    <li><a target="_blank" href="https://github.com/debel/git-panic-and-how-to-avoid-it">
-                      The code of this presentation on github</a></li>
-                </ul>
-            </section>
-            <section id="meme-2">
-                <h3>Thank you!</h3>
-                <img src="images/git.jpg" />
-            </section>
+  <div id="presentation" class="reveal">
+    <div class="slides">
+      <section id="title">
+        <h1>Git Panic</h1>
+        <h2 style="text-align: right;">and how to avoid it</h2>
+        <div style="text-align: left">Mihail Mikov<br/>Skyscanner, 2017</div>
+      </section>
+      <section id="goals">
+        <h3>Presentation Goals:</h3>
+        <ul>
+          <li>Improved personal productivity</li>
+          <li>Improved team workflow</li>
+          <li>Improved confidence</li>
+        </ul>
+        <div>
+          <hr/> through better understanding of git concepts and commands
         </div>
-    </div>
-    <script src="build/bundle.js"></script>
-    <script>
-        (function(i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function() {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        </ul>
+      </section>
+      <section id="symptoms-1">
+        <h3>Git Panic symptoms</h3>
+        <ul>
+          <li>Using git through GUIs only</li>
+          <li>Complicated, messy workflow</li>
+          <li>Unstructured, messy History</li>
+          <li>A lot of conflicts</li>
+        </ul>
+      </section>
+      <section id="symptoms-2">
+        <h3>Git Panic symptoms</h3>
+        <ul>
+          <li>Fix git by cloning to a fresh state</li>
+          <li>Blocked by not pushed work</li>
+          <li class="warning">Lost local changes</li>
+          <li class="warning">Lost remote commits</li>
+        </ul>
+      </section>
+      <section id="panic">
+        <img width="75%" src="images/panic-home-alone.jpg">
+      </section>
+      <section id="dont-panic">
+        <img width="50%" src="images/dontpanic.jpg" />
+      </section>
+      <section id="solutions-1">
+        <h3>Pure Vegan Homeopathic solutions</h3>
+        <ul>
+          <li>Use the console</li>
+          <li>Read the manual</li>
+          <li>Check your status and history often</li>
+          <li>Fetch remotes often</li>
+          <li>Push to your branch often</li>
+        </ul>
+      </section>
+      <section id="solutions-2">
+        <h3>Pure Vegan Homeopathic solutions</h3>
+        <ul>
+          <li>Follow a commit message format</li>
+          <li>Name remotes and branches meaningfully</li>
+          <li>Make git help you:
+            <ul>
+              <li>Aliases</li>
+              <li>Tags</li>
+              <li>Hooks</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+      <section id="setting-up">
+        <h3>Setting up a repository</h3>
+        <div>Use "-o" to give a meaningful name to the remote</div>
+        <pre><code class="bash">
+          # Use -o to give a meaningful name to the remote
+          git clone -o "remote_name"
 
-        ga('create', 'UA-93032616-1', 'auto');
-        ga('send', 'pageview');
-    </script>
+          # bare repos don't have a working tree
+          # which is useful for a shared remote
+          git init vs git init --bare
+        </code></pre>
+        <img width="80%" src="images/normal-vs-bare.png" />
+      </section>
+      <section id="aliases">
+        <h3>Setting Aliases</h3>
+        <div>Common tasks should be easy to perform</div>
+        <pre><code class="bash">
+          git config --global alias.co "checkout"
+          git config --global alias.br "branch --verbose"
+          git config --global alias.up "pull --rebase"
+          git config --global alias.lg "log --graph --format='%h %d %an %cr %s'"
+          git config --global alias.quickfix "commit -p --amend --no-edit"
+        </code></pre>
+      </section>
+      <section id="repo-history">
+        <h3>Project history</h3>
+        <div>Use a short, but detailed graph view of your history</div>
+        <pre><code class="bash">
+          git log --all --graph --format="%h %d %an %cr %s"
+          git log --author="Your Name" --since="3 weeks ago"
+          git log master...my-branch --left-right
+          git log -p
+        </code></pre>
+        <img width="80%" src="images/git-log-nice.png" />
+      </section>
+      <section id="commit-ranges">
+        <h3>Commit ranges</h3>
+        <div>double vs triple dot ranges</div>
+        <img width="45%" src="images/double-dot-tree.png" />
+        <img width="45%" src="images/triple-dot-tree.png" />
+      </section>
+      <section id="reflog">
+        <h3>Branch history</h3>
+        <div>Useful for finding things you were working on</div>
+        <pre><code class="bash">
+          # show a history of the commits
+          # the given branch was pointing to
+          git reflog &lt;branch&gt;
+        </code></pre>
+        <img width="80%" src="images/git-reflog.png" />
+      </section>
+      <section id="revs">
+        <h3>Referencing revisions</h3>
+        <div>Many ways to get to a commit</div>
+        <pre><code class="bash overflown">
+          # exclude commit and its ancestry
+          ^master
+
+          # the 2nd ancestor of the current commit
+          master~2
+          master^^
+
+          #the 2nd parent of the current commit
+          master^2
+
+          # the 3rd commit in the log of the branch
+          master@{2}
+
+          # the commit the branch pointed to at specific date
+          master@{5.days.ago}
+        </code></pre>
+      </section>
+      <section id="file-history">
+        <h3>File history</h3>
+        <div>Don't blame the player, blame the game</div>
+        <pre><code class="bash">
+          # show who and when last modified each line of a file
+          git blame --date=relative &lt;file-name&gt;
+
+          # show the detailed history of a file
+          git lg -p -- &lt;file-name&gt;
+        </code></pre>
+        <img width="100%" src="images/git-blame.png" />
+      </section>
+      <section id="adding">
+        <h3>Adding something specific</h3>
+        <div>Stage your changes and create your commits with care</div>
+        <pre><code class="bash">
+          git add -p
+        </code></pre>
+        <img width="80%" src="images/add-p.png" />
+      </section>
+      <section id="reset-p">
+        <h3>Clearing the index snippet by snippet</h3>
+        <div>That shouldn't be in your next commit</div>
+        <pre><code class="bash">
+          # unstage changes from the index
+          git reset -p
+        </code></pre>
+        <img width="80%" src="images/git-reset-p.png" />
+      </section>
+      <section id="checkout-p">
+        <h3>Make that snippet great again</h3>
+        <div>Bring back an older version of the snippet</div>
+        <pre><code class="bash">
+          # pick and override snippets in the working tree
+          git checkout -p &lt;commitish&gt; &lt;file-name&gt;
+        </code></pre>
+        <img width="80%" src="images/git-checkout-p.png" />
+      </section>
+      <section id="checkout">
+        <h3>Checkout the code</h3>
+        <div>Checkout does a lot of things</div>
+        <pre><code class="bash">
+          # checkout a branch you previously worked on
+          git checkout @{-1}
+
+          # create a new branch and switch to it
+          git checkout -b "new_branch"
+
+          # like "-b" creates a branch, but the first commit
+          # on this branch will start an independant history
+          git checkout --orphan "separate_history"
+        </code></pre>
+      </section>
+      <section id="detached-head">
+        <h3>Detached head</h3>
+        <div>A scary name for "you are not on any branch"</div>
+        <pre><code class="bash">
+          git checkout &lt;branch&gt;
+          # HEAD is pointing to a branch
+          # which is pointing to a commit
+
+          git checkout &lt;commit&gt;
+          # HEAD is pointing directly to a commit
+        </code></pre>
+      </section>
+      <section id="reset-hard">
+        <h3>Moving our HEAD around</h3>
+        <pre><code class="bash">
+          # both HEAD and the current branch
+          # will point to the given commit
+          git reset --hard &lt;commitish&gt;
+        </code></pre>
+        <div class="warning">
+          deletes changes in the index and working tree<br/> may lead to orphan commits
+        </div>
+      </section>
+      <section id="reset-soft">
+        <h3>Unpacking commits</h3>
+        <div>You don't need to rebase to squash your commits</div>
+        <pre><code class="bash">
+          # make HEAD point to a specific commit
+          # without changing the index or the working tree
+          git reset --soft &lt;commitish&gt;
+        </code></pre>
+      </section>
+      <section id="stash">
+        <h3>The stash is like a branch</h3>
+        <div>The dog ate my stash, maaan</div>
+        <pre><code class="bash overflown">
+          # save unfinished work as a new commit
+          git stash save -p "unfinished work"
+
+          # stash list and reflog stash are the same
+          git stash list
+          git reflog stash
+
+          # stash show and show stash are the same
+          git stash show -p
+          git show stash@{0}
+
+          # pop vs apply
+          git stash pop stash@{1}
+          git stash apply stash@{1}
+        </code></pre>
+      </section>
+      <section id="revert">
+        <h3>Undo some changes</h3>
+        <div>without rewriting history</div>
+        <pre><code class="bash">
+          # creates a commit that negates the changes
+          # introduced in another commit
+          git revert &lt;commitish&gt;
+        </code></pre>
+      </section>
+      <section id="cherry-pick">
+        <h3>"Moving" a single commit around</h3>
+        <pre><code class="bash">
+          # creates a new commit at HEAD with the
+          # same changes introduced by another commit
+          git cherry-pick &lt;commitish&gt;
+        </code></pre>
+      </section>
+      <section id="rebase">
+        <h3>"Moving" many commits around</h3>
+        <pre><code class="bash">
+          # as if you cherry-picked
+          # all the commits on a brach in order
+          git rebase &lt;new-base-commitish&gt; &lt;commitish-to-be-rebased&gt;
+
+          # interactive rebase
+          git rebase -i
+
+          # rebase instead of creating a merge commit
+          git pull --rebase
+        </code></pre>
+      </section>
+      <section id="conflicts">
+        <h3>Resolving conflicts</h3>
+        <div>
+          Conflicts appear when git cannot securly merge
+          the content of 2 versions of a file
+        </div>
+        <pre><code class="bash">
+          # you can always abort when there are conflicts
+          git &lt;merge | rebase | cherry-pick&gt; --abort
+
+          # prefer refs or commit sha-s to --theirs / --ours
+          # the meaning of theirs/ours is different between merge and rebase
+
+          # after resolving the conflicts finish the operation with
+          git &lt;merge | rebase | cherry-pick&gt; --continue
+        </code></pre>
+      </section>
+      <section id="pull-and-compare">
+        <h3>Pull, compare, rebase</h3>
+        <div>A pull is just a fetch and a merge</div>
+        <pre><code class="bash">
+          git fetch &lt;remote&gt; &lt;branch&gt;
+
+          # show a graph of all commits
+          # since the last common point between the branches
+          git lg --left-right HEAD...&lt;remote/branch&gt;
+
+          # rebase your changes on top of the remote
+          git rebase &lt;remote/branch&gt;
+        </code></pre>
+      </section>
+      <section id="safe-force-push">
+        <h3>Force push, but politely</h3>
+        <pre><code class="bash">
+          # only re-write the remote's history
+          # if you already have a local copy of it
+          git push --force-with-lease
+        </code></pre>
+      </section>
+      <section id="workflows">
+        <h3>Workflows</h3>
+        <ul>
+          <li>All in master</li>
+          <li>Team / Feature branches</li>
+          <li>Merge/Pull requests</li>
+        </ul>
+      </section>
+      <section id="merge-no-ff">
+        <h3>Merge, but no fast-forward</h3>
+        <pre><code class="bash">
+          # Rebase and merge to keep the branch history visible
+          git rebase feature_branch master
+          git merge feature_branch --no-ff
+        </code></pre>
+      </section>
+      <section id="tag-and-squash">
+        <h3>Tag and squash</h3>
+        <pre><code class="bash">
+          # tag the feature branch
+          git tag "feature_branch_done"
+
+          # squash using either reset or rebase
+          git reset --soft HEAD~5
+          git commit -m "squashed_feature"
+        </code></pre>
+      </section>
+      <section id="hooks">
+        <h3>Git hooks</h3>
+        <img width="75%" src="images/git-hooks.jpg" />
+      </section>
+      <section id="pre-commit-hook">
+        <h3>Example pre-commit hook</h3>
+        <pre><code class="bash">
+          # .git/hooks/pre-commit
+          # hook must be executable
+          #!/bin/sh
+
+          # run linter and tests
+          # if either commands exit status is non zero
+          # the commit process will be canceled
+          npm run lint
+          npm run test
+        </code></pre>
+      </section>
+      <section id="message-hook">
+        <h3>Example commit message template hook</h3>
+        <pre><code class="bash">
+          # .git/hooks/prepare-commit-msg
+          # hook must be executable
+          #!/bin/sh
+
+          # puts the name of the current branch
+          # in the commit message template
+          echo "[`git rev-parse --abbrev-ref HEAD`] MESSAGE HERE" > "$1"
+        </code></pre>
+      </section>
+      <section id="deployment-hook">
+        <h3>Example simple deployment hook</h3>
+        <pre><code class="bash">
+          # .git/hooks/post-receive
+          # hook must be executable
+          GIT_WORK_TREE=/app_code git checkout master -f
+          cd /app_code
+          npm install
+          npm run build
+          npm run restart
+          echo "deployed"
+        </code></pre>
+      </section>
+      <section id="take-aways">
+        <h3>Recap &amp; takeaways</h3>
+        <ul>
+          <li class="fragment">Use the console</li>
+          <li class="fragment">Name remotes, branches and commits meaningfully</li>
+          <li class="fragment">Keep your workflow &amp; history understandable</li>
+          <li class="fragment">Fetch and push often</li>
+          <li class="fragment">Read the manual</li>
+          <li class="fragment">Make git help you</li>
+        </ul>
+      </section>
+      <section id="links">
+        <h3>Links:</h3>
+        <ul>
+          <li><a target="_blank" href="http://learngitbranching.js.org/">Learn git in the browser</a></li>
+          <li><a target="_blank" href="https://www.atlassian.com/git/tutorials">
+                      Git tutorials by Atlassian</a></li>
+          <li><a target="_blank" href="https://marklodato.github.io/visual-git-guide/index-en.html">
+                      A visual guide to git</a></li>
+          <li><a target="_blank" href="https://codewords.recurse.com/issues/two/git-from-the-inside-out">
+                      Git from the inside out</a></li>
+          <li><a target="_blank" href="https://www.youtube.com/watch?v=fCtZWGhQBvo">
+                      Git from the inside out (youtube)</a></li>
+          <li><a target="_blank" href="https://git-scm.com/book/en/v1/Git-Internals">
+                      Git internals</a></li>
+          <li><a target="_blank" href="https://blog.scottnonnenberg.com/better-git-configuration/">
+                      Git configuration tips &amp; tricks</a></li>
+          <li><a target="_blank" href="https://github.com/debel/git-panic-and-how-to-avoid-it">
+                      The code of this presentation on github</a></li>
+        </ul>
+      </section>
+      <section id="meme-2">
+        <h3>Thank you!</h3>
+        <img width="60%" src="images/git.jpg" />
+      </section>
+    </div>
+  </div>
+  <script src="build/bundle.js"></script>
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-93032616-1', 'auto');
+    ga('send', 'pageview');
+  </script>
 </body>
 
 </html>

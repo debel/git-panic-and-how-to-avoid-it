@@ -17,11 +17,11 @@ const resources = {
     ]
 };
 
-const build = (resurce) => new Promise((y) => {
+const build = (resurce) => new Promise((done) => {
     gulp.src(resources[resurce])
         .pipe(concat('bundle.' + resurce))
         .pipe(gulp.dest('build/'))
-        .on('end', () => y);
+        .on('end', () => done);
 });
 
 gulp.task('default', (done) => {
