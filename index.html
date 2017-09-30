@@ -13,93 +13,106 @@
   <div id="presentation" class="reveal">
     <div class="slides">
       <section id="title">
+        <img class="fragment" src="images/HC17_logo.png" />
         <h1>Git Panic</h1>
-        <h2 style="text-align: right;">and how to avoid it</h2>
-        <div style="text-align: left">Mihail Mikov<br/>Skyscanner, 2017</div>
+        <h2>and how to avoid it</h2>
       </section>
-      <section id="goals">
-        <h3>Presentation Goals:</h3>
-        <ul>
-          <li>Improved personal productivity</li>
-          <li>Improved team workflow</li>
-          <li>Improved confidence</li>
-        </ul>
-        <div>
-          <hr/> through better understanding of git concepts and commands
+      <section id="alternative-title">
+        <div class="underlined">Alternative tite:</div>
+        <h3>Cool tricks you learn<br/>
+        if you actually read the manual</h3>
+        <div class="italic">
+          *Disclaimer: basic git knowledge required
         </div>
+      </section>
+      <section id="about-the-presenter">
+        <h3>About me:</h3>
+        <ul>
+          <li>Hi, I'm Mihail Mikov</li>
+          <li>Fullstack engineer at Skyscanner</li>
+          <li>Hobby juggler</li>
         </ul>
+      </section>
+      <section id="git-is-hard">
+        <h3>Git is hard</h3>
+        <img alt="git is hard meme with jackie chan" width="50%" src="images/git-is-hard.jpg" />
       </section>
       <section id="symptoms-1">
         <h3>Git Panic symptoms</h3>
         <ul>
-          <li>Using git through GUIs only</li>
-          <li>Complicated, messy workflow</li>
-          <li>Unstructured, messy History</li>
-          <li>A lot of conflicts</li>
+          <li class="fragment">Using git through GUIs only</li>
+          <li class="fragment">Unstructured / messy history</li>
+          <li class="fragment">Complicated / blocking workflow</li>
+          <li class="fragment warning">Fixing git by cloning to a new repo</li>
         </ul>
       </section>
       <section id="symptoms-2">
         <h3>Git Panic symptoms</h3>
         <ul>
-          <li>Fix git by cloning to a fresh state</li>
-          <li>Blocked by not pushed work</li>
-          <li class="warning">Lost local changes</li>
-          <li class="warning">Lost remote commits</li>
+          <li class="fragment">Push races / lots of conflicts</li>
+          <li class="fragment warning">Lost local changes</li>
+          <li class="fragment warning">Lost remote commits</li>
         </ul>
       </section>
-      <section id="panic">
-        <img width="75%" src="images/panic-home-alone.jpg">
+      <section id="how-do-i-fix-my-git">
+        <h3>So, how do I fix my git?</h3>
+        <img width="50%" src="images/house-how-do-we-fix-this.jpg" />
       </section>
-      <section id="dont-panic">
-        <img width="50%" src="images/dontpanic.jpg" />
+      <section id="ignore-it">
+        <h3>Bad Option 1: Ignore it</h3>
+        <img width="50%" src="images/dont-ignore-the-symptoms.gif">
+      </section>
+      <section id="panic">
+        <h3>Bad option 2: Panic</h3>
+        <img width="45%" src="images/panic-home-alone.jpg">
+      </section>
+      <section id="solution">
+        <h3>Solution</h3>
+        <img src="images/dontpanic.jpg" />
       </section>
       <section id="solutions-1">
         <h3>Pure Vegan Homeopathic solutions</h3>
         <ul>
-          <li>Use the console</li>
-          <li>Read the manual</li>
-          <li>Check your status and history often</li>
-          <li>Fetch remotes often</li>
-          <li>Push to your branch often</li>
+          <li class="fragment bold">Read the manual</li>
+          <li class="fragment">Use the console</li>
+          <li class="fragment">Check your status and history often</li>
+          <li class="fragment">Fetch remotes often</li>
+          <li class="fragment">Push your WIP often</li>
         </ul>
       </section>
       <section id="solutions-2">
         <h3>Pure Vegan Homeopathic solutions</h3>
         <ul>
-          <li>Follow a commit message format</li>
-          <li>Name remotes and branches meaningfully</li>
-          <li>Make git help you:
+          <li class="fragment">Follow a commit message format</li>
+          <li class="fragment">Name remotes and branches meaningfully</li>
+          <li class="fragment">Make git help you:
             <ul>
               <li>Aliases</li>
               <li>Tags</li>
               <li>Hooks</li>
+              <li>Command options</li>
             </ul>
           </li>
         </ul>
       </section>
-      <section id="setting-up">
-        <h3>Setting up a repository</h3>
-        <div>Use "-o" to give a meaningful name to the remote</div>
-        <pre><code class="bash">
-          # Use -o to give a meaningful name to the remote
-          git clone -o "remote_name"
-
-          # bare repos don't have a working tree
-          # which is useful for a shared remote
-          git init vs git init --bare
+      <section id="commands">
+        <h3>About commands</h3>
+        <pre><code class="sh">
+          commandName --options arguments
         </code></pre>
-        <img width="80%" src="images/normal-vs-bare.png" />
-      </section>
-      <section id="aliases">
-        <h3>Setting Aliases</h3>
-        <div>Common tasks should be easy to perform</div>
-        <pre><code class="bash">
-          git config --global alias.co "checkout"
-          git config --global alias.br "branch --verbose"
-          git config --global alias.up "pull --rebase"
-          git config --global alias.lg "log --graph --format='%h %d %an %cr %s'"
-          git config --global alias.quickfix "commit -p --amend --no-edit"
-        </code></pre>
+        <div id="command_types">
+          <span>Command Types:</span>
+          <ul>
+            <li><ul>
+              <li>Local</li>
+              <li>Remote</li>
+            </ul></li>
+            <li><ul>
+              <li>Pluming</li>
+              <li>Porcelain</li>
+            </ul></li>
+          </ul>
+        </div>
       </section>
       <section id="repo-history">
         <h3>Project history</h3>
@@ -108,9 +121,9 @@
           git log --all --graph --format="%h %d %an %cr %s"
           git log --author="Your Name" --since="3 weeks ago"
           git log master...my-branch --left-right
-          git log -p
+          git log --stat -p
         </code></pre>
-        <img width="80%" src="images/git-log-nice.png" />
+        <img src="images/git-log-nice.png" />
       </section>
       <section id="commit-ranges">
         <h3>Commit ranges</h3>
@@ -126,26 +139,31 @@
           # the given branch was pointing to
           git reflog &lt;branch&gt;
         </code></pre>
-        <img width="80%" src="images/git-reflog.png" />
+        <img src="images/git-reflog.png" />
       </section>
       <section id="revs">
-        <h3>Referencing revisions</h3>
-        <div>Many ways to get to a commit</div>
-        <pre><code class="bash overflown">
+        <h3>Referencing commits</h3>
+        <div>The many ways to refer to commits</div>
+        <pre><code class="bash">
           # exclude commit and its ancestry
           ^master
 
-          # the 2nd ancestor of the current commit
-          master~2
+          # the 2nd ancestor of the given commit
           master^^
+          master~2
 
           #the 2nd parent of the current commit
           master^2
-
-          # the 3rd commit in the log of the branch
+        </code></pre>
+        <img style="position: fixed; left: 72%; top: 36%;" src="images/refs.png" />
+      </section>
+      <section id="more-revs">
+        <h3>Referencing refs</h3>
+        <pre><code>
+          # the 3rd commit in the log of the ref
           master@{2}
 
-          # the commit the branch pointed to at specific date
+          # the commit the ref pointed to at the given date
           master@{5.days.ago}
         </code></pre>
       </section>
@@ -159,7 +177,7 @@
           # show the detailed history of a file
           git lg -p -- &lt;file-name&gt;
         </code></pre>
-        <img width="100%" src="images/git-blame.png" />
+        <img src="images/git-blame.png" />
       </section>
       <section id="adding">
         <h3>Adding something specific</h3>
@@ -167,7 +185,7 @@
         <pre><code class="bash">
           git add -p
         </code></pre>
-        <img width="80%" src="images/add-p.png" />
+        <img src="images/add-p.png" />
       </section>
       <section id="reset-p">
         <h3>Clearing the index snippet by snippet</h3>
@@ -176,7 +194,7 @@
           # unstage changes from the index
           git reset -p
         </code></pre>
-        <img width="80%" src="images/git-reset-p.png" />
+        <img src="images/git-reset-p.png" />
       </section>
       <section id="checkout-p">
         <h3>Make that snippet great again</h3>
@@ -185,7 +203,7 @@
           # pick and override snippets in the working tree
           git checkout -p &lt;commitish&gt; &lt;file-name&gt;
         </code></pre>
-        <img width="80%" src="images/git-checkout-p.png" />
+        <img src="images/git-checkout-p.png" />
       </section>
       <section id="checkout">
         <h3>Checkout the code</h3>
@@ -213,6 +231,7 @@
           git checkout &lt;commit&gt;
           # HEAD is pointing directly to a commit
         </code></pre>
+        <img src="images/detached-head.png" />
       </section>
       <section id="reset-hard">
         <h3>Moving our HEAD around</h3>
@@ -222,7 +241,8 @@
           git reset --hard &lt;commitish&gt;
         </code></pre>
         <div class="warning">
-          deletes changes in the index and working tree<br/> may lead to orphan commits
+          deletes changes in the index and working tree<br/>
+          may lead to disconnected commits
         </div>
       </section>
       <section id="reset-soft">
@@ -234,26 +254,6 @@
           git reset --soft &lt;commitish&gt;
         </code></pre>
       </section>
-      <section id="stash">
-        <h3>The stash is like a branch</h3>
-        <div>The dog ate my stash, maaan</div>
-        <pre><code class="bash overflown">
-          # save unfinished work as a new commit
-          git stash save -p "unfinished work"
-
-          # stash list and reflog stash are the same
-          git stash list
-          git reflog stash
-
-          # stash show and show stash are the same
-          git stash show -p
-          git show stash@{0}
-
-          # pop vs apply
-          git stash pop stash@{1}
-          git stash apply stash@{1}
-        </code></pre>
-      </section>
       <section id="revert">
         <h3>Undo some changes</h3>
         <div>without rewriting history</div>
@@ -262,6 +262,7 @@
           # introduced in another commit
           git revert &lt;commitish&gt;
         </code></pre>
+        <img src="images/revert.png" />
       </section>
       <section id="cherry-pick">
         <h3>"Moving" a single commit around</h3>
@@ -270,13 +271,14 @@
           # same changes introduced by another commit
           git cherry-pick &lt;commitish&gt;
         </code></pre>
+        <img src="images/cherry-pick.png" />
       </section>
       <section id="rebase">
         <h3>"Moving" many commits around</h3>
         <pre><code class="bash">
           # as if you cherry-picked
           # all the commits on a brach in order
-          git rebase &lt;new-base-commitish&gt; &lt;commitish-to-be-rebased&gt;
+          git rebase &lt;new-base&gt; &lt;target-defaults-to-HEAD&gt;
 
           # interactive rebase
           git rebase -i
@@ -285,25 +287,27 @@
           git pull --rebase
         </code></pre>
       </section>
-      <section id="conflicts">
-        <h3>Resolving conflicts</h3>
-        <div>
-          Conflicts appear when git cannot securly merge
-          the content of 2 versions of a file
-        </div>
+      <section id="rebase-img">
+        <h3>Rebase in action</h3>
+        <img width="55%" src="images/rebase.png" />
+      </section>
+      <section id="aliases">
+        <h3>Setting up Aliases</h3>
+        <div>Common tasks should be easy to perform</div>
         <pre><code class="bash">
-          # you can always abort when there are conflicts
-          git &lt;merge | rebase | cherry-pick&gt; --abort
+          git config --global alias.co "checkout"
+          git config --global alias.br "branch --verbose"
+          git config --global alias.up "pull --rebase"
 
-          # prefer refs or commit sha-s to --theirs / --ours
-          # the meaning of theirs/ours is different between merge and rebase
+          git config --global alias.lg
+            "log --graph --format='%h %d %an %cr %s'"
 
-          # after resolving the conflicts finish the operation with
-          git &lt;merge | rebase | cherry-pick&gt; --continue
+          git config --global alias.quickfix
+            "commit -p --amend --no-edit"
         </code></pre>
       </section>
-      <section id="pull-and-compare">
-        <h3>Pull, compare, rebase</h3>
+      <section id="fetch-and-compare">
+        <h3>Fetch, compare, rebase</h3>
         <div>A pull is just a fetch and a merge</div>
         <pre><code class="bash">
           git fetch &lt;remote&gt; &lt;branch&gt;
@@ -317,19 +321,39 @@
         </code></pre>
       </section>
       <section id="safe-force-push">
-        <h3>Force push, but politely</h3>
+        <h3>Safe force push</h3>
         <pre><code class="bash">
           # only re-write the remote's history
           # if you already have a local copy of it
           git push --force-with-lease
+
+          # alias: git sfp
+        </code></pre>
+      </section>
+      <section id="conflicts">
+        <h3>Resolving conflicts</h3>
+        <div>
+          Conflicts appear when git cannot merge<br/>
+          the content of two versions of a file meaningfully
+        </div>
+        <pre><code class="bash">
+          # abort if you can't solve the conflicts
+          git &lt;merge | rebase | cherry-pick&gt; --abort
+
+          # Warning: the meaning of --theirs / --ours
+          # is different between merge and rebase
+
+          # finish the operation with "--continue"
+          git add &lt;resolved-files&gt;
+          git &lt;merge | rebase | cherry-pick&gt; --continue
         </code></pre>
       </section>
       <section id="workflows">
-        <h3>Workflows</h3>
+        <h3>Common workflows</h3>
         <ul>
           <li>All in master</li>
           <li>Team / Feature branches</li>
-          <li>Merge/Pull requests</li>
+          <li>Merge / Pull requests</li>
         </ul>
       </section>
       <section id="merge-no-ff">
@@ -349,49 +373,6 @@
           # squash using either reset or rebase
           git reset --soft HEAD~5
           git commit -m "squashed_feature"
-        </code></pre>
-      </section>
-      <section id="hooks">
-        <h3>Git hooks</h3>
-        <img width="75%" src="images/git-hooks.jpg" />
-      </section>
-      <section id="pre-commit-hook">
-        <h3>Example pre-commit hook</h3>
-        <pre><code class="bash">
-          # .git/hooks/pre-commit
-          # hook must be executable
-          #!/bin/sh
-
-          # run linter and tests
-          # if either commands exit status is non zero
-          # the commit process will be canceled
-          npm run lint
-          npm run test
-        </code></pre>
-      </section>
-      <section id="message-hook">
-        <h3>Example commit message template hook</h3>
-        <pre><code class="bash">
-          # .git/hooks/prepare-commit-msg
-          # hook must be executable
-          #!/bin/sh
-
-          # puts the name of the current branch
-          # in the commit message template
-          echo "[`git rev-parse --abbrev-ref HEAD`] MESSAGE HERE" > "$1"
-        </code></pre>
-      </section>
-      <section id="deployment-hook">
-        <h3>Example simple deployment hook</h3>
-        <pre><code class="bash">
-          # .git/hooks/post-receive
-          # hook must be executable
-          GIT_WORK_TREE=/app_code git checkout master -f
-          cd /app_code
-          npm install
-          npm run build
-          npm run restart
-          echo "deployed"
         </code></pre>
       </section>
       <section id="take-aways">
@@ -425,9 +406,13 @@
                       The code of this presentation on github</a></li>
         </ul>
       </section>
+      <section id="qa">
+        <h3>Questions?!</h3>
+        <img width="60%" src="images/meeseeks-box-qa.png" />
+      </section>
       <section id="meme-2">
         <h3>Thank you!</h3>
-        <img width="60%" src="images/git.jpg" />
+        <img width="40%" src="images/git.jpg" />
       </section>
     </div>
   </div>

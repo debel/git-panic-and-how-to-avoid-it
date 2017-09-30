@@ -1,6 +1,28 @@
-.overflown {
-  padding-bottom: 40px !important;
+pre {
+  width: auto;
+}
+
+code {
+  font-size: 1.5em !important;
+  line-height: 1.05em !important;
+  max-height: 100% !important;
   overflow: visible !important;
+}
+
+.slides {
+  font-size: 1.5em !important;
+}
+
+.underlined {
+  text-decoration: underline;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.bold {
+  font-style: bold;
 }
 
 .inline-code {
@@ -10,4 +32,35 @@
 
 .warning {
   color: salmon;
+}
+
+#title>h1 {
+  margin-bottom: 0;
+}
+
+#title>h2 {
+  margin-top: 0;
+  margin-left: 25%;
+}
+
+#title>img {
+  transform: rotate(-33deg) scale(2);
+  position: relative;
+  left: 220px;
+  top: 420px;
+  background: none;
+  border: none;
+}
+
+#meme-2>h3 {
+  margin-bottom: 0;
+}
+
+#command_types>span {
+  vertical-align: top;
+  padding-right: 50px;
+}
+
+#command_types>ul ul {
+  list-style: none;
 }

@@ -5054,12 +5054,12 @@ snippets.forEach(snippet => {
 });
 
 Reveal.initialize({
-    width: 1024,
-    height: 768,
-    margin: 0.1,
-    minScale: 0.1,
-    maxScale: 1.3,
-    transition: 'fade',
+    width: 1920,
+    height: 1080,
+    margin: 0.01,
+    minScale: 0.5,
+    maxScale: 1.5,
+    transition: 'random',
     transitionSpeed: 'fast',
     controls: true,
     history: true

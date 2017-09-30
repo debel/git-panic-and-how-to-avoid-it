@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Git Panic and how to avoid it: Extra slides</title>
+  <meta charset="utf-8">
+  <meta name=viewport content="width=device-width, initial-scale=1">
+  <meta name="description" content="A presentation about advanced git topics and using git the right way" />
+  <link rel="stylesheet" href="build/bundle.css" />
+</head>
+
+<body>
+  <div id="presentation" class="reveal">
+    <div class="slides">
+      <section id="title">
+        <h1>Git Panic</h1>
+        <h2>and how to avoid it</h2>
+        <h3>/ super hidden extra slides /</h3>
+      </section>
+      <section id="remote-names">
+        <h3>Attack of the clones</h3>
+        <div>If you have multiple remotes, use "clone -o"<br /> to set a more meaningful remote name than "origin"</div>
+        <pre><code class="bash">
+            # Use -o to give a meaningful name to the remote
+            git clone REMOTE_URL -o "remote_name"
+          </code></pre>
+      </section>
+      <section id="normal-vs-bare">
+        <h3>Normal vs bare init</h3>
+        <pre><code class="bash">
+            # bare repos don't have a working tree
+            # which is useful for a shared remote
+            git init vs git init --bare
+          </code></pre>
+        <img src="images/normal-vs-bare.png" />
+      </section>
+
+      <section id="checkout-m">
+        <h3>That's for another branch</h3>
+        <div>Use "-m" if you have changes to your work tree<br/>
+          that you need to move to a different branch</div>
+        <pre><code class="bash">
+          # by default checkout refuses to switch branches
+          # if your work directory is dirty
+
+          # "-m" does a three-way merge between the current branch
+          # your working tree contents, and the new branch
+          git checkout -m &lt;commitish&gt;
+        </code></pre>
+      </section>
+
+      <section id="stash">
+        <h3>The stash is like a branch</h3>
+        <div>The dog ate my stash, maaan</div>
+        <pre><code class="bash">
+          # save unfinished work as a new commit
+          git stash save -p "unfinished work"
+
+          # stash list and reflog stash are the same
+          git stash list
+          git reflog stash
+
+          # stash show and show stash are the same
+          git stash show -p
+          git show stash@{0}
+
+          # pop vs apply
+          git stash pop stash@{1}
+          git stash apply stash@{1}
+        </code></pre>
+      </section>
+
+      <section id="hooks">
+        <h3>Git hooks</h3>
+        <img width="50%" src="images/git-hooks.jpg" />
+      </section>
+      <section id="pre-commit-hook">
+        <h3>Example pre-commit hook</h3>
+        <pre><code class="bash">
+          # .git/hooks/pre-commit
+          # hook must be executable
+          #!/bin/sh
+
+          # run linter and tests
+          # if either commands exit status is non zero
+          # the commit process will be canceled
+          npm run lint
+          npm run test
+        </code></pre>
+      </section>
+      <section id="message-template-hook">
+        <h3>Example commit message template hook</h3>
+        <pre><code class="bash">
+          # .git/hooks/prepare-commit-msg
+          # hook must be executable
+          #!/bin/sh
+
+          # puts the name of the current branch
+          # in the commit message template
+          echo "[`git rev-parse --abbrev-ref HEAD`] \
+            MESSAGE HERE" > "$1"
+        </code></pre>
+      </section>
+      <section id="deployment-hook">
+        <h3>Example simple deployment hook</h3>
+        <pre><code class="bash">
+          # .git/hooks/post-receive
+          # hook must be executable
+          GIT_WORK_TREE=/app_code git checkout master -f
+          cd /app_code
+          npm install
+          npm run build
+          npm run restart
+          echo "deployed"
+        </code></pre>
+      </section>
+      <section id="the-end">
+        <h3>No more slides, go away</h3>
+        <img width="45%" src="images/dev-by-0.jpg" />
+      </section>
+    </div>
+    <script src="build/bundle.js"></script>
+    <script>
+      (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-93032616-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+</body>
+
+</html>
