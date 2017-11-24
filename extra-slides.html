@@ -70,6 +70,18 @@
         </code></pre>
       </section>
 
+      <section id="tag-and-squash">
+        <h3>Tag and squash</h3>
+        <pre><code class="bash">
+          # tag the feature branch
+          git tag "feature_branch_done"
+
+          # squash using either reset or rebase
+          git reset --soft HEAD~5
+          git commit -m "squashed_feature"
+        </code></pre>
+      </section>
+
       <section id="hooks">
         <h3>Git hooks</h3>
         <img width="50%" src="images/git-hooks.jpg" />

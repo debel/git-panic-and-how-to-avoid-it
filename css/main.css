@@ -46,8 +46,8 @@ code {
 #title>img {
   transform: rotate(-33deg) scale(2);
   position: relative;
-  left: 220px;
-  top: 420px;
+  left: 150px;
+  top: 300px;
   background: none;
   border: none;
 }

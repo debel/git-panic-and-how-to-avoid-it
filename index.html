@@ -13,7 +13,7 @@
   <div id="presentation" class="reveal">
     <div class="slides">
       <section id="title">
-        <img class="fragment" src="images/HC17_logo.png" />
+        <img class="fragment" width="25%" src="images/plovdev-logo.png" />
         <h1>Git Panic</h1>
         <h2>and how to avoid it</h2>
       </section>
@@ -40,7 +40,7 @@
       <section id="symptoms-1">
         <h3>Git Panic symptoms</h3>
         <ul>
-          <li class="fragment">Using git through GUIs only</li>
+          <li class="fragment">Fear of the console / GUI only</li>
           <li class="fragment">Unstructured / messy history</li>
           <li class="fragment">Complicated / blocking workflow</li>
           <li class="fragment warning">Fixing git by cloning to a new repo</li>
@@ -58,13 +58,9 @@
         <h3>So, how do I fix my git?</h3>
         <img width="50%" src="images/house-how-do-we-fix-this.jpg" />
       </section>
-      <section id="ignore-it">
-        <h3>Bad Option 1: Ignore it</h3>
-        <img width="50%" src="images/dont-ignore-the-symptoms.gif">
-      </section>
       <section id="panic">
-        <h3>Bad option 2: Panic</h3>
-        <img width="45%" src="images/panic-home-alone.jpg">
+        <h3>Bad solution: Panic</h3>
+        <img width="45%" src="images/panic-home-alone.jpg" />
       </section>
       <section id="solution">
         <h3>Solution</h3>
@@ -179,6 +175,9 @@
         </code></pre>
         <img src="images/git-blame.png" />
       </section>
+      <section id="history-meme">
+        <img width="40%" src="images/history.jpg" />
+      </section>
       <section id="adding">
         <h3>Adding something specific</h3>
         <div>Stage your changes and create your commits with care</div>
@@ -233,6 +232,15 @@
         </code></pre>
         <img src="images/detached-head.png" />
       </section>
+      <section id="reset-soft">
+        <h3>Unpacking commits</h3>
+        <div>You don't need to rebase to squash your commits</div>
+        <pre><code class="bash">
+          # make HEAD point to a specific commit
+          # without changing the index or the working tree
+          git reset --soft &lt;commitish&gt;
+        </code></pre>
+      </section>
       <section id="reset-hard">
         <h3>Moving our HEAD around</h3>
         <pre><code class="bash">
@@ -245,14 +253,8 @@
           may lead to disconnected commits
         </div>
       </section>
-      <section id="reset-soft">
-        <h3>Unpacking commits</h3>
-        <div>You don't need to rebase to squash your commits</div>
-        <pre><code class="bash">
-          # make HEAD point to a specific commit
-          # without changing the index or the working tree
-          git reset --soft &lt;commitish&gt;
-        </code></pre>
+      <section id="git-head-meme">
+        <img src="images/git-head.jpg" />
       </section>
       <section id="revert">
         <h3>Undo some changes</h3>
@@ -306,29 +308,9 @@
             "commit -p --amend --no-edit"
         </code></pre>
       </section>
-      <section id="fetch-and-compare">
-        <h3>Fetch, compare, rebase</h3>
-        <div>A pull is just a fetch and a merge</div>
-        <pre><code class="bash">
-          git fetch &lt;remote&gt; &lt;branch&gt;
-
-          # show a graph of all commits
-          # since the last common point between the branches
-          git lg --left-right HEAD...&lt;remote/branch&gt;
-
-          # rebase your changes on top of the remote
-          git rebase &lt;remote/branch&gt;
-        </code></pre>
-      </section>
-      <section id="safe-force-push">
-        <h3>Safe force push</h3>
-        <pre><code class="bash">
-          # only re-write the remote's history
-          # if you already have a local copy of it
-          git push --force-with-lease
-
-          # alias: git sfp
-        </code></pre>
+      <section id="ignore-it">
+        <h3>Conflicts? Just ignore 'em</h3>
+        <img width="50%" src="images/dont-ignore-the-symptoms.gif">
       </section>
       <section id="conflicts">
         <h3>Resolving conflicts</h3>
@@ -356,23 +338,36 @@
           <li>Merge / Pull requests</li>
         </ul>
       </section>
+      <section id="fetch-and-compare">
+        <h3>Fetch, compare, rebase</h3>
+        <div>A pull is just a fetch and a merge</div>
+        <pre><code class="bash">
+          git fetch &lt;remote&gt; &lt;branch&gt;
+
+          # show a graph of all commits
+          # since the last common point between the branches
+          git lg --left-right HEAD...&lt;remote/branch&gt;
+
+          # rebase your changes on top of the remote
+          git rebase &lt;remote/branch&gt;
+        </code></pre>
+      </section>
+      <section id="safe-force-push">
+        <h3>Safe force push</h3>
+        <pre><code class="bash">
+          # only re-write the remote's history
+          # if you already have a local copy of it
+          git push --force-with-lease
+
+          # alias: git sfp
+        </code></pre>
+      </section>
       <section id="merge-no-ff">
         <h3>Merge, but no fast-forward</h3>
         <pre><code class="bash">
           # Rebase and merge to keep the branch history visible
           git rebase feature_branch master
           git merge feature_branch --no-ff
-        </code></pre>
-      </section>
-      <section id="tag-and-squash">
-        <h3>Tag and squash</h3>
-        <pre><code class="bash">
-          # tag the feature branch
-          git tag "feature_branch_done"
-
-          # squash using either reset or rebase
-          git reset --soft HEAD~5
-          git commit -m "squashed_feature"
         </code></pre>
       </section>
       <section id="take-aways">
