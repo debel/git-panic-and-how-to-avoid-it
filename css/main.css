@@ -44,10 +44,10 @@ code {
 }
 
 #title>img {
-  transform: rotate(-33deg) scale(2);
-  position: relative;
-  left: 150px;
-  top: 300px;
+  transform: rotate(-33deg) scale(1.5);
+  position: absolute;
+  left: 45%;
+  top: 0px;
   background: none;
   border: none;
 }
